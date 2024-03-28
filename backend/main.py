@@ -1,12 +1,13 @@
 from fastapi import FastAPI  # , HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
+
+# from fastapi.staticfiles import StaticFiles
 import os
-from authenticator import authenticator
+
+# from authenticator import authenticator
 
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
-app.include_router(authenticator.router, tags=["accounts"])
+# app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
