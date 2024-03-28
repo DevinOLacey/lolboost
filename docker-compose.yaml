@@ -1,1 +1,47 @@
-hsjkldfhjlfdjhlkfdsdfasfadsfasdfasdfa
+volumes:
+  wiz101:
+    external: true
+
+services:
+  backend:
+    environment:
+      CORS_HOST: http://localhost:3000
+      DATABASE_URL: postgresql://wiz:1o1@postgres/wiz101
+      SIGNING_KEY: ${SIGNING_KEY}
+      WAIT_HOSTS: postgres:5432
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
+      PORT: 8000
+    build:
+      context: backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - 8000:8000
+    volumes:
+      - ./api:/app
+
+  frontend:
+    image: node:lts-bullseye
+    command: /bin/bash run.sh
+    working_dir: /app
+    volumes:
+      - ./ghi:/app
+    ports:
+      - "3000:3000"
+    environment:
+      HOST_OS: ${OS}
+      NODE_ENV: development
+      HOST: "0.0.0.0"
+      PUBLIC_URL: ${PUBLIC_URL}
+      REACT_APP_API_HOST: http://localhost:8000
+
+  postgres:
+    image: postgres:14.5-bullseye
+    volumes:
+      - wiz101:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 1o1
+      POSTGRES_USER: wiz
+      POSTGRES_DB: wiz101
+    ports:
+      - "15432:5432"
