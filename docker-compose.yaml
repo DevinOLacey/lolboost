@@ -1,31 +1,31 @@
 volumes:
-  wiz101:
+  LoL:
     external: true
 
 services:
-  backend:
+  api:
     environment:
       CORS_HOST: http://localhost:3000
-      DATABASE_URL: postgresql://wiz:1o1@postgres/wiz101
-      SIGNING_KEY: ${SIGNING_KEY}
+      DATABASE_URL: postgresql://league:legends@postgres/lolboost
+      # SIGNING_KEY: ${SIGNING_KEY}
       WAIT_HOSTS: postgres:5432
       WAIT_BEFORE: 5
       WAIT_TIMEOUT: 60
       PORT: 8000
     build:
-      context: backend
+      context: api
       dockerfile: Dockerfile.dev
     ports:
       - 8000:8000
     volumes:
       - ./api:/app
 
-  frontend:
+  ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
     working_dir: /app
     volumes:
-      - ./frontend:/app
+      - ./ghi:/app
     ports:
       - "3000:3000"
     environment:
@@ -38,10 +38,10 @@ services:
   postgres:
     image: postgres:14.5-bullseye
     volumes:
-      - wiz101:/var/lib/postgresql/data
+      - LoL:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: 1o1
-      POSTGRES_USER: wiz
-      POSTGRES_DB: wiz101
+      POSTGRES_PASSWORD: legends
+      POSTGRES_USER: league
+      POSTGRES_DB: lolboost
     ports:
       - "15432:5432"

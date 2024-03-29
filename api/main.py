@@ -4,10 +4,11 @@ from fastapi.middleware.cors import CORSMiddleware
 # from fastapi.staticfiles import StaticFiles
 import os
 
+# from routers import card, posts, accounts, collection
 # from authenticator import authenticator
 
 app = FastAPI()
-# app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
 
 app.add_middleware(
     CORSMiddleware,
