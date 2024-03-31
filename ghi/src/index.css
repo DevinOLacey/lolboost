@@ -16,3 +16,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* fonts.css */
+@font-face {
+  font-family: 'Breaking Italic C';
+  src: local('Breaking Italic C'), url('./fonts/BreakingitalicpersonaluseCni-8MlmJ.otf') format('truetype');
+  /* Add other font formats (e.g., woff, woff2) if available */
+}
+
