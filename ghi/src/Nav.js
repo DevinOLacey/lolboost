@@ -150,7 +150,7 @@ export default function Example() {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              to="/logout"
+                              to="/accounts/logout"
                               onClick={logout}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
@@ -170,7 +170,7 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            to="/login"
+                            to="/accounts/login"
                             className={classNames(
                               active
                                 ? "bg-gray-900 text-white"

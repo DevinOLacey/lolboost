@@ -8,7 +8,6 @@ function Home() {
             justifyContent: 'center', 
             alignItems: 'center', 
             flexWrap: 'wrap', 
-            // marginTop: '5%',
         }}>
             <h1 style={{
                 textAlign: 'center',

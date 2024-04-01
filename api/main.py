@@ -1,14 +1,14 @@
 from fastapi import FastAPI  # , HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-# from fastapi.staticfiles import StaticFiles
 import os
 
-# from routers import card, posts, accounts, collection
-# from authenticator import authenticator
+from routers import accounts
+from authenticator import authenticator
 
 app = FastAPI()
-
+app.include_router(accounts.router, tags=["accounts"])
+app.include_router(authenticator.router, tags=["accounts"])
 
 app.add_middleware(
     CORSMiddleware,
