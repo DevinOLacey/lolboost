@@ -108,7 +108,7 @@ class AccountsRepository(BaseModel):
             u_gg=record[3],
         )
 
-    def get_account(self, email: str) -> UserOutWithPassword:
+    def get_account(self, email: str) -> UserOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:

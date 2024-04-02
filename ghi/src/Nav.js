@@ -16,7 +16,7 @@ function classNames(...classes) {
 }
 export default function Example() {
   const { token, logout } = useToken();
-  const [username, setUsername] = useState("");
+  const [riot_id, setRiot_id] = useState("");
   const [changed, setChanged] = useState(false);
 
   const location = useLocation();
@@ -42,11 +42,11 @@ export default function Example() {
       },
     };
     const response = await fetch(
-      `${process.env.REACT_APP_API_HOST}/users/self`,
+      `${process.env.REACT_APP_API_HOST}account`,
       config
     );
     const data = await response.json();
-    setUsername(data.username);
+    setRiot_id(data.riot_id);
   }
 
   useEffect(() => {
@@ -113,7 +113,7 @@ export default function Example() {
                     <div>
                       <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <p className="block px-4 py-2 text-sm text-gray-100">
-                          Hello, {username}!
+                          Hello, {riot_id}!
                         </p>
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
