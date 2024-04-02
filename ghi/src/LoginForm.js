@@ -28,7 +28,7 @@ export default function LoginForm() {
     try {
       const token = await login(email, password, baseUrl);
       setToken(token);
-      navigate("/users/self");
+      navigate("/home");
     } catch (error) {
       let errormessage = error["message"];
       setAlert(errormessage);

@@ -150,7 +150,7 @@ export default function Example() {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              to="/accounts/logout"
+                              to="/home"
                               onClick={logout}
                               className={classNames(
                                 active ? "bg-gray-100" : "",

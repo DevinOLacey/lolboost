@@ -8,10 +8,10 @@ export default function CreateAccountForm() {
   const { setToken, baseUrl } = useAuthContext();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const handleEmailChange = (event) => {
+  const [username, setUsername] = useState("");
+  const handleUsernameChange = (event) => {
     const value = event.target.value;
-    setEmail(value);
+    setUsername(value);
   };
 
 
@@ -21,10 +21,24 @@ export default function CreateAccountForm() {
     setPassword(value);
   };
 
-  const [passwordconfirmation, setPasswordConfirmation] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const handlePasswordConfirmationChange = (event) => {
     const value = event.target.value;
     setPasswordConfirmation(value);
+  };
+
+
+  const [riotId, setRiotId] = useState("");
+  const handleRiotIdChange = (event) => {
+    const value = event.target.value;
+    setRiotId(value);
+  };
+
+
+  const [u_gg, setU_gg] = useState("");
+  const handleU_ggChange = (event) => {
+    const value = event.target.value;
+    setU_gg(value);
   };
 
   const [alert, setAlert] = useState("");
@@ -32,9 +46,11 @@ export default function CreateAccountForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {};
-    data.email = email;
+    data.username = username;
     data.password = password;
-    data.password_confirmation = passwordconfirmation;
+    data.password_confirmation = passwordConfirmation;
+    data.riot_id = riotId;
+    data.u_gg = u_gg;
 
     const fetchConfig = {
       method: "POST",
@@ -50,13 +66,12 @@ export default function CreateAccountForm() {
     if (response.status === 400) {
       setAlert(responseMessage);
     } else if (response.ok) {
-      setEmail("");
-      setEmail("");
+      setUsername("");
       setPassword("");
       setPasswordConfirmation("");
-      const token = await login(email, password, baseUrl);
+      const token = await login(username, password, baseUrl);
       setToken(token);
-      navigate("/users/self");
+      navigate("/home");
     }
   };
 
@@ -67,18 +82,18 @@ export default function CreateAccountForm() {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
+              htmlFor="username"
             >
               Email
             </label>
             <input
-              onChange={handleEmailChange}
+              onChange={handleUsernameChange}
               required
               type="text"
-              id="email"
-              name="email"
+              id="username"
+              name="username"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={email}
+              value={username}
               placeholder="Email"
             />
           </div>
@@ -114,8 +129,44 @@ export default function CreateAccountForm() {
               id="passwordconf"
               name="passwordconf"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              value={passwordconfirmation}
+              value={passwordConfirmation}
               placeholder="******************"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="riotid"
+            >
+              Riot ID
+            </label>
+            <input
+              onChange={handleRiotIdChange}
+              required
+              type="text"
+              id="riotid"
+              name="riotid"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              value={riotId}
+              placeholder="Riot ID"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="u_gg"
+            >
+              U.gg
+            </label>
+            <input
+              onChange={handleU_ggChange}
+              required
+              type="text"
+              id="u_gg"
+              name="u_gg"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              value={u_gg}
+              placeholder="U.gg"
             />
           </div>
           <div className="flex items-center justify-between">

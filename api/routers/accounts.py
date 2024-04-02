@@ -1,7 +1,7 @@
 from fastapi import (
     Depends,
     HTTPException,
-    status,
+    # status,
     Response,
     APIRouter,
     Request,
@@ -14,16 +14,15 @@ from pydantic import BaseModel
 from queries.accounts import (
     UserIn,
     UserOut,
-    UserUpdateIn,
+    # UserUpdateIn,
     AccountsRepository,
     DuplicateAccountError,
     Error,
-    UserProfileOut,
+    # UserProfileOut,
     UserOutWithPassword,
 )
 
 from typing import Union, List
-from fastapi import HTTPException, status
 
 
 class AccountForm(BaseModel):
