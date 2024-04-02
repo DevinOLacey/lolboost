@@ -2,10 +2,7 @@ from pydantic import BaseModel
 from queries.pool import pool
 from typing import List, Union, Optional
 from fastapi import HTTPException
-from pydantic import BaseModel
-from queries.pool import pool
-from typing import List, Union, Optional
-from fastapi import HTTPException
+
 
 # from PIL import Image
 # import secrets
@@ -134,3 +131,25 @@ class AccountsRepository(BaseModel):
         except Exception as e:
             print(e)
             return {"message": "Account not found"}
+
+    def view_self(self, email: str) -> UserOut:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT id, email, riot_id, u_gg
+                        FROM accounts
+                        WHERE email = %s;
+                        """,
+                        [email],
+                    )
+                    record = db.fetchone()
+                    if record is None:
+                        return "fuck"
+                    return self.record_to_user_out(record)
+        except Exception as e:
+            print(e)
+            raise HTTPException(
+                status_code=400, detail="Could not fetch account"
+            ) from e

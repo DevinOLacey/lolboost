@@ -42,7 +42,7 @@ export default function Example() {
       },
     };
     const response = await fetch(
-      `${process.env.REACT_APP_API_HOST}account`,
+      `${process.env.REACT_APP_API_HOST}/account/self`,
       config
     );
     const data = await response.json();
@@ -113,15 +113,15 @@ export default function Example() {
                     <div>
                       <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <p className="block px-4 py-2 text-sm text-gray-100">
-                          Hello, {riot_id}!
+                          {riot_id}
                         </p>
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
-                        <img
+                        {/* <img
                           className="h-8 w-8 rounded-full"
                           src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
                           alt="ByteDance, Public domain, via Wikimedia Commons"
-                        />
+                        /> */}
                       </Menu.Button>
                     </div>
                     <Transition

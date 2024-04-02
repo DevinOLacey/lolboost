@@ -103,3 +103,14 @@ def get_account(
     if result == "fuck":
         raise HTTPException(status_code=404, detail="Account not found")
     return result
+
+
+@router.get("/account/self", response_model=UserOut)
+async def view_self(
+    repo: AccountsRepository = Depends(),
+    account: dict = Depends(authenticator.try_get_current_account_data),
+):
+    result = repo.view_self(email=account.get("username"))
+    if result == "fuck":
+        raise HTTPException(status_code=404, detail="Account not found")
+    return result
