@@ -5,6 +5,7 @@ import Nav from './Nav';
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from './LoginForm';
 import CreateAccountForm from './CreateAccountForm';
+import Footer from './Footer';
 
 function App() {
   const domain = /https:\/\/[^/]+/;
@@ -15,7 +16,7 @@ function App() {
         <header style={{ position: "sticky", top: "0", zIndex: "999" }}>
           <Nav />
         </header>
-        <div>
+        <div style={{ minHeight: "calc(100vh - 60px)" }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="home" element={<Home />} />
@@ -26,9 +27,11 @@ function App() {
             </Route>
           </Routes>
         </div>
+        <footer style={{ background: '#1f97f2', bottom: '0', position: 'static' }}>
+          <Footer />
+        </footer>
       </BrowserRouter>
     </AuthProvider>
-
   );
 }
 

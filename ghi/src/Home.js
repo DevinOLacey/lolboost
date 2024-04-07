@@ -8,29 +8,34 @@ function Home() {
             justifyContent: 'center', 
             alignItems: 'center', 
             flexWrap: 'wrap', 
+            marginTop: '5%',
+            marginLeft: '2%',
+            marginRight: '2%',
         }}>
             <h1 style={{
                 textAlign: 'center',
                 flexBasis: '100%',
                 fontSize: '70px',
+                fontFamily: 'Courier New',
         }}
-        >Dedication to Education</h1>
+        >Discover a service that suits you</h1>
             <button style={{ 
                 fontSize: '230px', 
                 backgroundColor: 'grey', 
-                padding: '250px 120px', 
+                padding: '250px 80px', 
                 transition: 'transform 0.3s',
                 position: 'relative',
                 zIndex: 1,
                 paddingLeft: '120px',
-                flexBasis: '40%',
                 border: '2px solid red',
                 fontFamily: 'Breaking Italic C',
                 backgroundImage: 'url(/garen.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
-                color: 'red'
+                color: 'red',
+                flex: '1',
+                // flexBasis: '40%',
             }} 
             onMouseEnter={(e) => {
                 e.target.style.transform = 'scale(1.06)';
@@ -41,22 +46,26 @@ function Home() {
                 e.target.style.zIndex = 1;
             }}>
                 Boosting
+                <p style={{fontFamily:'Courier New', fontSize:'40px'}}>get a little nudge</p>
             </button>
             <button style={{ 
                 fontSize: '230px', 
                 backgroundColor: 'grey', 
-                padding: '250px 120px', 
+                padding: '250px 80px', 
                 transition: 'transform 0.3s',
                 position: 'relative',
                 zIndex: 1,
-                flexBasis: '40%',
                 border: '2px solid red',
                 fontFamily: 'Breaking Italic C',
                 backgroundImage: 'url(/katarina.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
-                color: 'red'
+                color: 'red',
+                flex: '1',
+                // flexBasis: '40%',
+
+
             }} 
             onMouseEnter={(e) => {
                 e.target.style.transform = 'scale(1.06)';
@@ -67,6 +76,7 @@ function Home() {
                 e.target.style.zIndex = 1;
             }}>
                 Coaching
+                <p style={{fontFamily:'Courier New', fontSize:'40px'}}>match with a mentor</p>
             </button>
             <button style={{ 
                 fontSize: '60px', 
@@ -75,9 +85,11 @@ function Home() {
                 transition: 'transform 0.3s',
                 position: 'relative',
                 zIndex: 1,
-                flexBasis: '96.9%',
+                flexBasis: '90%',
+                flex: '1',
                 border: '2px solid red',
-                fontFamily: 'Breaking Italic C'
+                fontFamily: 'Breaking Italic C',
+                marginBottom: '3%',
             }} 
             onMouseEnter={(e) => {
                 e.target.style.transform = 'scale(1.03)';
@@ -88,7 +100,7 @@ function Home() {
                 e.target.style.zIndex = 1;
             }}>
                 Purchase a Duo Partner
-                <p style={{fontFamily:'Oxygen', fontSize:'20px'}}>we match you with an elo booster to play at your elo</p>
+                <p style={{fontFamily:'Courier New', fontSize:'20px'}}>we match you with an elo booster to play at your elo</p>
             </button>
         </div>
     );
