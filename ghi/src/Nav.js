@@ -8,7 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
-
+  { name: 'test', href: '/test', current: false },
 ];
 
 function classNames(...classes) {

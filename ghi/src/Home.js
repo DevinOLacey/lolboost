@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+    const navigate = useNavigate();
 
     return (
         <div style={{ 
@@ -8,7 +10,7 @@ function Home() {
             justifyContent: 'center', 
             alignItems: 'center', 
             flexWrap: 'wrap', 
-            marginTop: '5%',
+            marginTop: '2%',
             marginLeft: '2%',
             marginRight: '2%',
         }}>
@@ -18,7 +20,8 @@ function Home() {
                 fontSize: '70px',
                 fontFamily: 'Courier New',
         }}
-        >Discover a service that suits you</h1>
+        >Discover a service that suits you
+        </h1>
             <button style={{ 
                 fontSize: '230px', 
                 backgroundColor: 'grey', 
@@ -35,8 +38,9 @@ function Home() {
                 backgroundRepeat: 'no-repeat',
                 color: 'red',
                 flex: '1',
-                // flexBasis: '40%',
-            }} 
+                flexBasis: '50%',
+            }}
+            onClick={() => navigate('/boost')} 
             onMouseEnter={(e) => {
                 e.target.style.transform = 'scale(1.06)';
                 e.target.style.zIndex = 2;
@@ -63,7 +67,7 @@ function Home() {
                 backgroundRepeat: 'no-repeat',
                 color: 'red',
                 flex: '1',
-                // flexBasis: '40%',
+                flexBasis: '50%',
 
 
             }} 

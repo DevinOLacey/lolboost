@@ -6,6 +6,7 @@ import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from './LoginForm';
 import CreateAccountForm from './CreateAccountForm';
 import Footer from './Footer';
+import BoostForm from './BoostForm';
 
 function App() {
   const domain = /https:\/\/[^/]+/;
@@ -25,6 +26,8 @@ function App() {
               <Route path="logout" element={<LoginForm />} />
               <Route path="create" element={<CreateAccountForm />} />
             </Route>
+            <Route path="boost" element={<BoostForm />} />
+            <Route path="test" element={<BoostForm />} />
           </Routes>
         </div>
         <footer style={{ background: '#1f97f2', bottom: '0', position: 'static' }}>
