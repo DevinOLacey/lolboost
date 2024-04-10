@@ -1,239 +1,177 @@
-import React, { useState } from "react";
+import { useState, Fragment } from "react";
 import { useNavigate } from "react-router";
 import { servers } from "./components/statics";
+import { Listbox, Transition } from "@headlessui/react";
+import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 export default function BoostForm() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        region: "",
-        queueType: "",
-        boostType: "",
-        currentTier: "",
-        currentDivision: "",
-        desiredTier: "",
-        desiredDivision: "",
-        additionalNotes: "",
-    });
+  const [region, setRegion] = useState("Select a Region");
+  const [queueType, setQueueType] = useState("Select a Queue Type");
+  const [boostType, setBoostType] = useState("Select a Boost Type");
+  const [currentTier, setCurrentTier] = useState("Select your Current Tier");
+  const [currentDivision, setCurrentDivision] = useState(
+    "Select your Current Division"
+  );
+  const [desiredTier, setDesiredTier] = useState("Select your Desired Tier");
+  const [desiredDivision, setDesiredDivision] = useState(
+    "Select your Desired Division"
+  );
+  const [additionalNotes, setAdditionalNotes] = useState("");
 
-    const handleFormChange = (e) => {
-        const inputName = e.target.name
-        const value = e.target.value
-        setFormData({
-            ...formData,
-            [inputName]: value
-        })
-    }
+  const regionChange = (e) => {
+    setRegion(e.target.value);
+  };
+  const queueTypeChange = (e) => {
+    setQueueType(e.target.value);
+  };
+  const boostTypeChange = (e) => {
+    setBoostType(e.target.value);
+  };
+  const currentTierChange = (e) => {
+    setCurrentTier(e.target.value);
+  };
+  const currentDivisionChange = (e) => {
+    setCurrentDivision(e.target.value);
+  };
+  const desiredTierChange = (e) => {
+    setDesiredTier(e.target.value);
+  };
+  const desiredDivisionChange = (e) => {
+    setDesiredDivision(e.target.value);
+  };
+  const additionalNotesChange = (e) => {
+    setAdditionalNotes(e.target.value);
+  };
 
-    const [alert, setAlert] = useState("");
+  const [alert, setAlert] = useState("");
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const fetchConfig = {
-            method: "POST",
-            body: JSON.stringify(formData),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
-        const url = `${process.env.REACT_APP_API_HOST}/boost`;
-        const response = await fetch(url, fetchConfig);
-        let responseMessage = await response.json();
-
-        if (response.status === 400) {
-            setAlert(responseMessage);
-        } else if (response.ok) {
-            setFormData({
-                region: "",
-                queueType: "",
-                boostType: "",
-                currentTier: "",
-                currentDivision: "",
-                desiredTier: "",
-                desiredDivision: "",
-                additionalNotes: "",
-            });
-            navigate("/home");
-        }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = {
+      region: region,
+      queueType: queueType,
+      boostType: boostType,
+      currentTier: currentTier,
+      currentDivision: currentDivision,
+      desiredTier: desiredTier,
+      desiredDivision: desiredDivision,
+      additionalNotes: additionalNotes,
     };
 
-    return (
-        <div className="flex py-10 justify-center">
-            <form onSubmit={handleSubmit} id="boostForm">
-                <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div className="mb-4">
-                    <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                            htmlFor="queueType"
-                        >
-                            Region
-                        </label>
-                    <select onChange={handleFormChange} value={formData.region} required id="region" name= "region" className="form-select">
-                            <option value=""></option>
-                            {servers.map(server => {
-                                return(
-                                    <option key={server.id} value={server.name}>{server.name}</option>
-                                )
-                        })}
-                        </select>
-                    </div>
-                    {/* <div className="mb-4">
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                            htmlFor="queueType"
-                        >
-                            Queue Type
-                        </label>
-                        <input
-                            onChange={handleFormChange}
-                            required
-                            type="text"
-                            id="queueType"
-                            name="queueType"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            value={queueType}
-                            placeholder="Queue Type"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                            htmlFor="boostType"
-                        >
-                            Boost Type
-                        </label>
-                        <input
-                            onChange={handleFormChange}
-                            required
-                            type="text"
-                            id="boostType"
-                            name="boostType"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            value={boostType}
-                            placeholder="Boost Type"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                            htmlFor="currentTier"
-                        >
-                            Current Tier
-                        </label>
-                        <input
-                            onChange={handleCurrentTierChange}
-                            required
-                            type="text"
-                            id="currentTier"
-                            name="currentTier"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            value={currentTier}
-                            placeholder="Current Tier"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                            htmlFor="currentDivision"
-                        >
-                            Current Division
-                        </label>
-                        <input
-                            onChange={handleCurrentDivisionChange}
-                            required
-                            type="text"
-                            id="currentDivision"
-                            name="currentDivision"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            value={currentDivision}
-                            placeholder="Current Division"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                            htmlFor="desiredTier"
-                        >
-                            Desired Tier
-                        </label>
-                        <input
-                            onChange={handleDesiredTierChange}
-                            required
-                            type="text"
-                            id="desiredTier"
-                            name="desiredTier"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            value={desiredTier}
-                            placeholder="Desired Tier"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                            htmlFor="desiredDivision"
-                        >
-                            Desired Division
-                        </label>
-                        <input
-                            onChange={handleDesiredDivisionChange}
-                            required
-                            type="text"
-                            id="desiredDivision"
-                            name="desiredDivision"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            value={desiredDivision}
-                            placeholder="Desired Division"
-                        />
-                    </div> */}
-                    <div className="mb-4">
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                            htmlFor="additionalNotes"
-                        >
-                            Additional Notes
-                        </label>
-                        <textarea
-                            onChange={handleFormChange}
-                            id="additionalNotes"
-                            name="additionalNotes"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            value={formData.additionalNotes}
-                            placeholder="Additional Notes"
-                        ></textarea>
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit"
-                        >
-                            Submit
-                        </button>
-                    </div>
-                    {alert ? (
-                        <div
-                            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                            role="alert"
-                        >
-                            <strong className="font-bold">Yikes!</strong>
-                            <span className="block sm:inline"> {alert.detail}.</span>
-                            <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
-                                <svg
-                                    className="fill-current h-6 w-6 text-red-500"
-                                    role="button"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <title>Close</title>
-                                    <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
-                                </svg>
-                            </span>
-                        </div>
-                    ) : (
-                        <></>
-                    )}
-                </div>
-            </form>
-        </div>
-    );
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const url = `${process.env.REACT_APP_API_HOST}/boosts/`;
+    const response = await fetch(url, fetchConfig);
+    let responseMessage = await response.json();
+
+    if (response.status === 400) {
+      setAlert(responseMessage);
+    } else if (response.ok) {
+      setRegion("Select a Region");
+      setQueueType("Select a Queue Type");
+      setBoostType("Select a Boost Type");
+      setCurrentTier("Select your Current Tier");
+      setCurrentDivision("Select your Current Division");
+      setDesiredTier("Select your Desired Tier");
+      setDesiredDivision("Select your Desired Division");
+      setAdditionalNotes("");
+      navigate("/home");
+    }
+  };
+
+  return (
+    <div className="flex justify-center space-x-2 gap-2 flex-wrap flex-start">
+      <div className="bg-gray-200 p-2 rounded-md">
+        <Listbox value={region} onChange={regionChange}>
+          {({ open }) => (
+            <>
+              <Listbox.Label
+                className="block text-sm font-medium leading-6 "
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "5px",
+                }}
+              >
+                Region
+              </Listbox.Label>
+              <div className="relative mt-2">
+                <Listbox.Button className="relative w-full cursor-default rounded-md  py-1.5 pl-3 pr-10 text-left  ring-1 ring-inset ring-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
+                  <span className="flex items-center">
+                    <span className="ml-3 block truncate">
+                      {region || "Select a region"}
+                    </span>
+                  </span>
+                  <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                    <ChevronUpDownIcon
+                      className="h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </Listbox.Button>
+                <Transition
+                  show={open}
+                  as={Fragment}
+                  leave="transition ease-in duration-100"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                    {servers.map((region) => (
+                      <Listbox.Option
+                        key={region.id}
+                        className={({ active }) =>
+                          classNames(
+                            active
+                              ? "bg-indigo-600 text-white"
+                              : "bg-white text-black",
+                            "relative cursor-default select-none py-2 pl-3 pr-9"
+                          )
+                        }
+                        value={region.name}
+                      >
+                        {({ region, active }) => (
+                          <>
+                            <div className="flex items-center">
+                              <span
+                                className={classNames(
+                                  region ? "font-semibold" : "font-normal",
+                                  "ml-3 block truncate"
+                                )}
+                              >
+                                text
+                              </span>
+                            </div>
+                            {region ? (
+                              <span
+                                className={classNames(
+                                  active ? "text-white" : "text-indigo-600",
+                                  "absolute inset-y-0 right-0 flex items-center pr-4"
+                                )}
+                              ></span>
+                            ) : null}
+                          </>
+                        )}
+                      </Listbox.Option>
+                    ))}
+                  </Listbox.Options>
+                </Transition>
+              </div>
+            </>
+          )}
+        </Listbox>
+      </div>
+    </div>
+  );
 }
