@@ -1,88 +1,88 @@
 export const tiers = [
   {
     id: 1,
-    tier: "iron",
+    name: "Iron",
   },
   {
     id: 2,
-    tier: "bronze",
+    name: "Bronze",
   },
   {
     id: 3,
-    tier: "silver",
+    name: "Silver",
   },
   {
     id: 4,
-    tier: "gold",
+    name: "Gold",
   },
   {
     id: 5,
-    tier: "platinum",
+    name: "Platinum",
   },
   {
     id: 6,
-    tier: "diamond",
+    name: "Diamond",
   },
   {
     id: 7,
-    tier: "master",
+    name: "Master",
   },
   {
     id: 8,
-    tier: "grandmaster",
+    name: "Grandmaster",
   },
   {
     id: 9,
-    tier: "challenger",
+    name: "Challenger",
   },
 ];
 
 export const divisions = [
   {
     id: 1,
-    division: "I",
+    name: "I",
   },
   {
     id: 2,
-    division: "II",
+    name: "II",
   },
   {
     id: 3,
-    division: "III",
+    name: "III",
   },
   {
     id: 4,
-    division: "IV",
+    name: "IV",
   },
 ];
 
-export const queueType = [
+export const queueTypes = [
   {
     id: 1,
-    queueType: "Solo/Duo",
+    name: "Solo/Duo",
   },
   {
     id: 2,
-    queueType: "Flex",
+    name: "Flex",
   },
 ];
 
-export const boostType = [
+export const boostTypes = [
   {
     id: 1,
-    boostType: "Win Boost",
+    name: "Win Boost",
   },
   {
     id: 2,
-    boostType: "Duo Boost",
+    name: "Duo Boost",
   },
   {
     id: 3,
-    boostType: "Placement",
+    name: "Placement",
   },
   {
     id: 4,
-    boostType: "Coaching",
+    name: "Coaching",
   },
 ];
 export const servers = [
@@ -90,44 +90,44 @@ export const servers = [
     id: 1,
     name: "NA",
   },
-  {
-    id: 2,
-    name: "EUW",
-  },
-  {
-    id: 3,
-    name: "EUNE",
-  },
-  {
-    id: 4,
-    name: "LAN",
-  },
-  {
-    id: 5,
-    name: "LAS",
-  },
-  {
-    id: 6,
-    name: "OCE",
-  },
-  {
-    id: 7,
-    name: "BR",
-  },
-  {
-    id: 8,
-    name: "TR",
-  },
-  {
-    id: 9,
-    name: "RU",
-  },
-  {
-    id: 10,
-    name: "JP",
-  },
-  {
-    id: 11,
-    name: "KR",
-  },
+  // {
+  //   id: 2,
+  //   name: "EUW",
+  // },
+  // {
+  //   id: 3,
+  //   name: "EUNE",
+  // },
+  // {
+  //   id: 4,
+  //   name: "LAN",
+  // },
+  // {
+  //   id: 5,
+  //   name: "LAS",
+  // },
+  // {
+  //   id: 6,
+  //   name: "OCE",
+  // },
+  // {
+  //   id: 7,
+  //   name: "BR",
+  // },
+  // {
+  //   id: 8,
+  //   name: "TR",
+  // },
+  // {
+  //   id: 9,
+  //   name: "RU",
+  // },
+  // {
+  //   id: 10,
+  //   name: "JP",
+  // },
+  // {
+  //   id: 11,
+  //   name: "KR",
+  // },
 ];

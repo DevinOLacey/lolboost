@@ -89,7 +89,7 @@ export default function CreateAccountForm() {
             <input
               onChange={handleUsernameChange}
               required
-              type="text"
+              type="email"
               id="username"
               name="username"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -161,7 +161,7 @@ export default function CreateAccountForm() {
             <input
               onChange={handleU_ggChange}
               required
-              type="text"
+              type="url"
               id="u_gg"
               name="u_gg"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
